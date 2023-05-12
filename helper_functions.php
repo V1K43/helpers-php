@@ -261,6 +261,18 @@ function pre()
     echo (php_sapi_name() !== 'cli') ? '</pre>' : '';exit();
 }
 
+if (!function_exists('pre')) {
+    function pre()
+    {
+        echo '<pre>';
+        array_map(function ($x) {
+            var_dump($x);
+        }, func_get_args());
+        die;
+    }
+}
+
+
 function rand_color() { //generate random color
     return '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
 }
